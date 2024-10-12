@@ -14,8 +14,8 @@ def ai_insights():
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": "write a haiku about recursion in programming"}
+            {"role": "system", "content": "You are a helpful assistant that should only answer questions related to recipes, ingredients, calories, and cuisines. Any other topics prompted, respond with 'Invalid question.'"},
+            {"role": "user", "content": "what are some good Italian recipes that can be made with eggs, chicken, cheese, and tortillas that is close to about 1800 calories?"}
         ]
     )
     return completion.choices[0].message.content
@@ -25,6 +25,6 @@ def main():
     os.environ["OPENAI_API_KEY"] = api_key
     insight = ai_insights()
     print('\n', insight)
-    
+
 if __name__ == '__main__':
     main()
