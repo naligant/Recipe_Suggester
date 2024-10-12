@@ -2,4 +2,5 @@ fastapi
 uvicorn[standard]==0.23.2
 requests
 openai
-subprocess
+# subprocess
+pymongo[srv]==3.10
