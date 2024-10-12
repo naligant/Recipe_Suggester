@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ./app
+    container_name: fastapi-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./client
+    container_name: nextjs-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
