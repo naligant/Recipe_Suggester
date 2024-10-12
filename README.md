@@ -8,5 +8,8 @@ source venv/bin/activate
 cd client
 npm install
 npm run dev
+cd ..
+cd app
+uvicorn --reload main:app
 
 ```
