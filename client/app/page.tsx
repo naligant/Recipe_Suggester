@@ -5,12 +5,14 @@ import TextField from '@mui/material/TextField'
 
 export default function Home() {
   return( <div>
+
+    <h1 style = {{textAlign: 'center'}}>TITLE</h1>
     <Box
       component = "form"
-      sx = {{ '& >:not(style)':{m:1, width: '25ch'}}}
+      sx = {{ '& >:not(style)':{m:1, width: '50ch'}}}
       noValidate
       autoComplete = "off"
-      ><TextField id="standard-basic" label="Enter Ingredients" variant="standard" /></Box>
+      ><TextField id="standard-basic" label="What ingredients do you have" variant="standard" /></Box>
 
   </div>
     
