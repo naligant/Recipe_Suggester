@@ -5,8 +5,6 @@ import TextField from '@mui/material/TextField'
 
 export default function Home() {
   return( <div>
-
-    <h1 style = {{textAlign: 'center'}}>TITLE</h1>
     <Box
       component = "form"
       sx = {{ '& >:not(style)':{m:1, width: '50ch'}}}
