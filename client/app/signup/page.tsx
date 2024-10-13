@@ -106,7 +106,7 @@ const SignUp: React.FC = (): JSX.Element => {
         } else {
           const result = await response.json();
           alert("Signup successful");
-          router.push("/signin"); // Redirect to sign-in page
+          router.push("/login"); // Redirect to sign-in page
         }
       } catch (error) {
         console.error("Error during signup:", error);

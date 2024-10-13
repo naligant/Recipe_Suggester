@@ -106,7 +106,7 @@ const SignIn: React.FC = (): JSX.Element => {
           alert("Login successful");
 
           // Redirect to dashboard after successful login
-          router.push("/dashboard");
+          router.push("/home");
         }
       } catch (error) {
         console.error("Error during login:", error);

@@ -55,3 +55,7 @@ async def login(user: SignupRequest):
     elif user.email in users_db and users_db[user.email]["password"] != user.password:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials!")
     return {"message": "Login successful"}
+
+@app.get("/usersdb")
+async def login():
+    return users_db
