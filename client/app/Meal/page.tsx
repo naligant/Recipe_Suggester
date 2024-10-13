@@ -14,7 +14,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link'; // Import Link from next/link
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
-import avataricon from "../Images/profile-user.png"
 
 const pages = [
   { name: 'Add Ingredients', href: '/add-ingredients' },
@@ -27,13 +26,16 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 export default function CenteredBoxPage() {
   const [leftInput, setLeftInput] = React.useState("");
   const [rightInput, setRightInput] = React.useState("");
-  const [marginTop, setMarginTop] = React.useState("auto"); // Initial margin (centered)
+  const [marginTop, setMarginTop] = React.useState("30vh"); // Initial margin (centered)
   const [boxHeight, setBoxHeight] = React.useState("300px"); // Initial height
+  const [transitionApplied, setTransitionApplied] = React.useState(false); // State to track if transition should be applied
 
   // Function to handle button click
   const handleClick = async () => {
+    setTransitionApplied(true); // Enable transition when button is clicked
     setMarginTop('20px'); // Move the box to the top of the screen
     setBoxHeight('150px'); // Reduce the height by half
+
     try {
       const response = await fetch('http://localhost:8000/submit_values', {
         method: 'POST',
@@ -41,33 +43,32 @@ export default function CenteredBoxPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ calories: leftInput, cuisine: rightInput}),
-
       });
 
       const data = await response.json();
       console.log(data);
-  } catch (error) {
-    console.error("Error submitting calories and cuisine", error);
-  }
-};
+    } catch (error) {
+      console.error("Error submitting calories and cuisine", error);
+    }
+  };
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorElNav(event.currentTarget);
+    setAnchorElNav(event.currentTarget);
   };
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorElUser(event.currentTarget);
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-      setAnchorElNav(null);
+    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
-      setAnchorElUser(null);
+    setAnchorElUser(null);
   };
 
   return (
@@ -98,7 +99,6 @@ export default function CenteredBoxPage() {
         >
           <Container maxWidth={false}>
             <Toolbar disableGutters sx={{ padding: 0 }}>
-              {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
               <Typography
                 variant="h6"
                 noWrap
@@ -238,6 +238,9 @@ export default function CenteredBoxPage() {
           textAlign: "center",
           backgroundColor: "#ffffff", // Custom background color
           boxShadow: 5, // Drop shadow from Material-UI theme
+          transition: transitionApplied
+            ? "margin-top 0.5s ease, height 0.5s ease"
+            : "none", // Smooth transition for marginTop and height
         }}
       >
         <Box sx={{ display: "flex", width: "100%", mb: 2 }}>
@@ -246,23 +249,33 @@ export default function CenteredBoxPage() {
             label="Calorie Count"
             value={leftInput}
             onChange={(e) => setLeftInput(e.target.value)} // Update state on change
-            sx={{ flex: 1, mr: 1 }} // Margin right for spacing
+            sx={{ flex: 1, 
+              mr: 1,
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              borderRadius: "4px"
+            }} // Margin right for spacing
           />
           <TextField
             variant="outlined"
             label="Cuisine"
             value={rightInput}
             onChange={(e) => setRightInput(e.target.value)} // Update state on change
-            sx={{ flex: 1 }} // Take equal space
+            sx={{ 
+              flex: 1,
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              borderRadius: "4px"
+            }} // Take equal space
           />
         </Box>
         <Button
           variant="contained"
-          color="primary"
           onClick={handleClick}
-          sx={{ mt: 2 }}
+          sx={{ 
+            mt: 2,
+            backgroundColor: "#007aff !important" 
+          }}
         >
-          Click Me
+          Plan Meal
         </Button>
       </Box>
     </Box>
