@@ -6,7 +6,13 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 
-const CenteredBox = styled(Box)(({ theme, marginTop, boxHeight }) => ({
+// Define a type for custom props (boxHeight and marginTop)
+interface CenteredBoxProps {
+  marginTop: string;
+  boxHeight: string;
+}
+
+const CenteredBox = styled(Box)<CenteredBoxProps>(({ theme, marginTop, boxHeight }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -50,27 +56,21 @@ export default function CenteredBoxPage() {
         <Box sx={{ display: 'flex', width: '100%', mb: 2 }}>
           <TextField
             variant="outlined"
-            label="Calorie Count"
+            label="Left Input"
             value={leftInput}
             onChange={(e) => setLeftInput(e.target.value)} // Update state on change
             sx={{ flex: 1, mr: 1 }} // Margin right for spacing
           />
           <TextField
             variant="outlined"
-            label="Cuisine"
+            label="Right Input"
             value={rightInput}
             onChange={(e) => setRightInput(e.target.value)} // Update state on change
             sx={{ flex: 1 }} // Take equal space
           />
         </Box>
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={handleClick} 
-          size="large" // Change button size here (small, medium, or large)
-          sx={{ mt: 2, width: '200px', height: '50px' }} // Custom width and height
-        >
-          Prepare Meal
+        <Button variant="contained" color="primary" onClick={handleClick} sx={{ mt: 2 }}>
+          Click Me
         </Button>
       </CenteredBox>
     </Box>
