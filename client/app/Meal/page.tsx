@@ -4,24 +4,25 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Toolbar from '@mui/material/Toolbar';
-import Menu from '@mui/material/Menu';
-import IconButton from '@mui/material/IconButton';
-import MenuItem from '@mui/material/MenuItem';
-import Link from 'next/link'; // Import Link from next/link
-import Tooltip from '@mui/material/Tooltip';
-import Avatar from '@mui/material/Avatar';
+import AppBar from "@mui/material/AppBar";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Toolbar from "@mui/material/Toolbar";
+import Menu from "@mui/material/Menu";
+import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
+import Link from "next/link"; // Import Link from next/link
+import Tooltip from "@mui/material/Tooltip";
+import Avatar from "@mui/material/Avatar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const pages = [
-  { name: 'Add Ingredients', href: '/add-ingredients' },
-  { name: 'Meal Calc', href: '/meal' },
-  { name: 'Logout', href: '/login' }
+  { name: "Add Ingredients", href: "/add-ingredients" },
+  { name: "Meal Calc", href: "/meal" },
+  { name: "Logout", href: "/login" },
 ];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function CenteredBoxPage() {
   const [leftInput, setLeftInput] = React.useState("");
@@ -30,20 +31,23 @@ export default function CenteredBoxPage() {
   const [marginTop, setMarginTop] = React.useState("30vh"); // Initial margin (centered)
   const [boxHeight, setBoxHeight] = React.useState("300px"); // Initial height
   const [transitionApplied, setTransitionApplied] = React.useState(false); // State to track if transition should be applied
+  const [loading, setLoading] = React.useState(false); // State to manage loading animation
 
   // Function to handle button click
   const handleClick = async () => {
     setTransitionApplied(true); // Enable transition when button is clicked
-    setMarginTop('20px'); // Move the box to the top of the screen
-    setBoxHeight('150px'); // Reduce the height by half
+    setMarginTop("20px"); // Move the box to the top of the screen
+    setBoxHeight("150px"); // Reduce the height by half
+
+    setLoading(true); // Start loading animation
 
     try {
-      const response = await fetch('http://localhost:8000/submit_values', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/submit_values", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ calories: leftInput, cuisine: rightInput}),
+        body: JSON.stringify({ calories: leftInput, cuisine: rightInput }),
       });
 
       const data = await response.json();
@@ -51,11 +55,17 @@ export default function CenteredBoxPage() {
       console.log(data);
     } catch (error) {
       console.error("Error submitting calories and cuisine", error);
+    } finally {
+      setLoading(false); // Stop loading animation after request completes
     }
   };
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -251,10 +261,11 @@ export default function CenteredBoxPage() {
             label="Calorie Count"
             value={leftInput}
             onChange={(e) => setLeftInput(e.target.value)} // Update state on change
-            sx={{ flex: 1, 
+            sx={{
+              flex: 1,
               mr: 1,
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              borderRadius: "4px"
+              borderRadius: "4px",
             }} // Margin right for spacing
           />
           <TextField
@@ -262,24 +273,27 @@ export default function CenteredBoxPage() {
             label="Cuisine"
             value={rightInput}
             onChange={(e) => setRightInput(e.target.value)} // Update state on change
-            sx={{ 
+            sx={{
               flex: 1,
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              borderRadius: "4px"
+              borderRadius: "4px",
             }} // Take equal space
           />
         </Box>
+        {loading && <CircularProgress sx={{ mt: 2 }} />}{" "}
+        {/* Show loader when loading */}
         <Button
           variant="contained"
           onClick={handleClick}
-          sx={{ 
+          sx={{
             mt: 2,
-            backgroundColor: "#007aff !important" 
+            backgroundColor: "#007aff !important",
           }}
         >
           Plan Meal
         </Button>
       </Box>
+
       {fetchedData && ( // Conditionally render the textbox with the fetched data
         <Box
           sx={{
@@ -287,7 +301,7 @@ export default function CenteredBoxPage() {
             display: "flex",
             justifyContent: "center",
             width: "100%",
-            height: "70%"
+            height: "70%",
           }}
         >
           <TextField
@@ -300,7 +314,12 @@ export default function CenteredBoxPage() {
             InputProps={{
               readOnly: true, // Make the TextField read-only
             }}
-            sx={{ width: "80%", maxWidth: "600px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", minheight:"200px" }}
+            sx={{
+              width: "80%",
+              maxWidth: "600px",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              minheight: "200px",
+            }}
           />
         </Box>
       )}
