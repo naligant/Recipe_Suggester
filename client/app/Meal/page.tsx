@@ -30,28 +30,9 @@ export default function CenteredBoxPage() {
   const [boxHeight, setBoxHeight] = React.useState("300px"); // Initial height
 
   // Function to handle button click
-  const handleClick = () => {
-    setMarginTop("20px"); // Move the box to the top of the screen
-    setBoxHeight("150px"); // Reduce the height by half
-  };
-
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorElNav(event.currentTarget);
-  };
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-      setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-      setAnchorElUser(null);
+  const handleClick = async () => {
+    setMarginTop('20px'); // Move the box to the top of the screen
+    setBoxHeight('150px'); // Reduce the height by half
   };
 
   return (

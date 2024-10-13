@@ -8,22 +8,22 @@ path = os.path.join(root_dir, '.env')
 
 load_dotenv(path)
 
-def ai_insights():
+def ai_insights(calories, cuisine, ingredients):
     client = OpenAI()
 
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a helpful assistant that should only answer questions related to recipes, ingredients, calories, and cuisines. Any other topics prompted, respond with 'Invalid question.'"},
-            {"role": "user", "content": "what are some good Italian recipes that can be made with eggs, milk, bread, and oil that is close to about 1800 calories?"}
+            {"role": "user", "content": f"Give me a few {cuisine} recipes that can be made with {', '.join(ingredients)} that are close to about {calories} calories? Give me a short description, ingredient list, and instructions to cook the recipe in a Python list format."}
         ]
     )
     return completion.choices[0].message.content
 
-def main():
+def main(calories, cuisine, ingredients):
     api_key = os.getenv('OPENAI_KEY')
     os.environ["OPENAI_API_KEY"] = api_key
-    insight = ai_insights()
+    insight = ai_insights(calories, cuisine, ingredients)
     print('\n', insight)
 
 if __name__ == '__main__':
