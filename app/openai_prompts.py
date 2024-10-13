@@ -29,9 +29,9 @@ def ai_insights(calories, cuisine, ingredients, api_key=' '):
 
 
 def main(calories, cuisine, ingredients):
-    apikey = os.getenv('OPENAIKEY')
-    os.environ["OPENAIAPI_KEY"] = api_key
-    insight = ai_insights(calories, cuisine, ingredients, api_key)
+    apikey = os.getenv('OPENAI_KEY')
+    os.environ["OPENAI_API_KEY"] = apikey
+    insight = ai_insights(calories, cuisine, ingredients, apikey)
     return insight
 
 if __name__ == '__main__':
