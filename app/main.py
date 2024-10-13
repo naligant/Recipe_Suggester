@@ -59,3 +59,12 @@ async def login(user: SignupRequest):
 @app.get("/usersdb")
 async def login():
     return users_db
+
+#get user information to the frontend
+class IngredientList(BaseModel):
+    ingredients: list[str]
+
+@app.post("/submit")
+async def submit_ingredients(data: IngredientList):
+    print("Received ingredients: {data.ingredients}")
+    return {"message": "Ingredients received", "ingredients": data.ingredients}

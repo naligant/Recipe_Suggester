@@ -1,4 +1,4 @@
-'use'
+'use client';
 
 import React, { useState } from 'react';
 import './IngredientInput.css'; // Import for simple styling
@@ -31,10 +31,29 @@ const IngredientInput: React.FC = () => {
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
     console.log("Submitted ingredients:", ingredientsList);
+
+    // Send the ingredientsList to the FastAPI backend
+    try {
+      const response = await fetch('http://localhost:8000/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ingredients: ingredientsList }), // Send the list in the request body
+      });
+
+      const data = await response.json(); // Handle the response if needed
+      console.log(data); // Log the response for debugging
+    } catch (error) {
+      console.error("Error submitting ingredients:", error);
+    }
+
     // Clear all the ingredients after submission
-    
+    setIngredientsList([]); // Reset the ingredients list
   };
 
   return (
@@ -70,7 +89,10 @@ const IngredientInput: React.FC = () => {
           </ul>
         )}
 
-        <button className="submit-button" onClick={handleSubmit}>Submit</button>
+        {/* Use a form with onSubmit to call handleSubmit */}
+        <form id="ingredient_form" onSubmit={handleSubmit}>
+          <button type="submit" className="submit-button">Submit</button>
+        </form>
       </div>
     </div>
   );
