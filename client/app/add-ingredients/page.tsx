@@ -91,7 +91,9 @@ const IngredientInput: React.FC = () => {
 
         {/* Use a form with onSubmit to call handleSubmit */}
         <form id="ingredient_form" onSubmit={handleSubmit}>
+          <a href = "/meal" target = "_self" rel = "noopener noreferrer">
           <button type="submit" className="submit-button">Submit</button>
+            </a>
         </form>
       </div>
     </div>
