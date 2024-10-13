@@ -85,4 +85,4 @@ async def submit_values(data: calories_cuisine):
     ai_insight = main(data.calories, data.cuisine, ingredients_store)
     print(data.calories)
 
-    return {"message": "AI insight generated", "ai insight": ai_insight, "calories": data.calories, "cuisine": data.cuisine, "ingredients": ingredients_store}
+    return {"message": "AI insight generated", "ai_insight": ai_insight, "calories": data.calories, "cuisine": data.cuisine, "ingredients": ingredients_store}

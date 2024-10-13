@@ -22,7 +22,7 @@ def ai_insights(calories, cuisine, ingredients, api_key=' '):
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a helpful assistant that should only answer questions related to recipes, ingredients, calories, and cuisines. Any other topics prompted, respond with 'Invalid question.'"},
-            {"role": "user", "content": f"Give me a few {cuisine} recipes that can be made with {ingredients} that are close to about {calories} calories? Give me a short description, ingredient list, and instructions to cook the recipe in a Python list format."}
+            {"role": "user", "content": f"Give me a few {cuisine} recipes that can be made with {ingredients} that are close to about {calories} calories? Give me a short description, ingredient list, and instructions to cook the recipe in a text file format"}
         ]
     )
     return completion.choices[0].message.content

@@ -26,6 +26,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 export default function CenteredBoxPage() {
   const [leftInput, setLeftInput] = React.useState("");
   const [rightInput, setRightInput] = React.useState("");
+  const [fetchedData, setFetchedData] = React.useState("");
   const [marginTop, setMarginTop] = React.useState("30vh"); // Initial margin (centered)
   const [boxHeight, setBoxHeight] = React.useState("300px"); // Initial height
   const [transitionApplied, setTransitionApplied] = React.useState(false); // State to track if transition should be applied
@@ -46,6 +47,7 @@ export default function CenteredBoxPage() {
       });
 
       const data = await response.json();
+      setFetchedData(data.ai_insight);
       console.log(data);
     } catch (error) {
       console.error("Error submitting calories and cuisine", error);
@@ -278,6 +280,30 @@ export default function CenteredBoxPage() {
           Plan Meal
         </Button>
       </Box>
+      {fetchedData && ( // Conditionally render the textbox with the fetched data
+        <Box
+          sx={{
+            mt: 2,
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            height: "70%"
+          }}
+        >
+          <TextField
+            variant="outlined"
+            label="Response"
+            value={fetchedData}
+            multiline
+            rows={20}
+            fullWidth
+            InputProps={{
+              readOnly: true, // Make the TextField read-only
+            }}
+            sx={{ width: "80%", maxWidth: "600px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", minheight:"200px" }}
+          />
+        </Box>
+      )}
     </Box>
   );
 }
