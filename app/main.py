@@ -1,35 +1,57 @@
-from fastapi import FastAPI
-import uvicorn
-from pymongo.mongo_client import MongoClient
-from dotenv import load_dotenv
-import os
-
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-path = os.path.join(root_dir, '.env')
-
-load_dotenv(path)
+from fastapi import FastAPI, HTTPException, status
+from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-#connect mongodb database
+# Allow CORS for your frontend domain
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Update with your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# uri = os.getenv("MONGODB_URI")
-# # print(uri)
+# Mock database of users
+users_db = {
+    "user1@example.com": {
+        "password": "password123"
+    },
+    "user2@example.com": {
+        "password": "password456"
+    },
+}
 
-# # Create a new client and connect to the server
-# client = MongoClient(uri)
-# # print(client)
+# Request body model for signup
+class SignupRequest(BaseModel):
+    email: str
+    password: str
 
-# # Send a ping to confirm a successful connection
-# try:
-#     client.admin.command('ping')
-#     print("Pinged your deployment. You successfully connected to MongoDB!")
-# except Exception as e:
-#     print(e)
+# Signup route to add new users
+@app.post("/signup")
+async def signup(user: SignupRequest):
+    # Check if user already exists
+    if user.email in users_db:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email is already registered.",
+        )
+    
+    # Add the new user to the database
+    users_db[user.email] = {"password": user.password}
+    
+    return {"message": "User registered successfully"}
 
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
-
-# if __name__ == '__main__':
-#     uvicorn.run(app, host="0.0.0.0", port = 8000)
+# Existing login route (for context)
+@app.post("/login")
+async def login(user: SignupRequest):
+    '''
+    if user.email not in users_db or users_db[user.email]["password"] != user.password:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    '''
+    if user.email not in users_db:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not registered!")
+    elif user.email in users_db and users_db[user.email]["password"] != user.password:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials!")
+    return {"message": "Login successful"}
