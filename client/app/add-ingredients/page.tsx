@@ -1,4 +1,4 @@
-'use'
+'use client'
 
 import React, { useState } from 'react';
 import './IngredientInput.css'; // Import for simple styling
@@ -34,7 +34,7 @@ const IngredientInput: React.FC = () => {
   const handleSubmit = () => {
     console.log("Submitted ingredients:", ingredientsList);
     // Clear all the ingredients after submission
-    
+    setIngredientsList([]);
   };
 
   return (
