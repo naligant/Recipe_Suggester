@@ -54,6 +54,7 @@ const IngredientInput: React.FC = () => {
 
     // Clear all the ingredients after submission
     setIngredientsList([]);
+    
   };
 
   return (
@@ -91,9 +92,9 @@ const IngredientInput: React.FC = () => {
 
         {/* Use a form with onSubmit to call handleSubmit */}
         <form id="ingredient_form" onSubmit={handleSubmit}>
-          <a href = "/meal" target = "_self" rel = "noopener noreferrer">
-          <button type="submit" className="submit-button">Submit</button>
-            </a>
+         
+            <button type = "submit" className = "submit-button"> <a href = "/Meal" target = "_self" rel = "noopener" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>Submit</a></button>
+          
         </form>
       </div>
     </div>
