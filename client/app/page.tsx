@@ -1,25 +1,47 @@
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import { Box } from "@mui/material";
 import Image from "next/image";
-import * as React from 'react';
-import Link from 'next/link'; // Corrected import
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import foodImage from "./food.jpg";
 
 export default function Home() {
   return (
-    <div>
-      <h1 style={{ textAlign: 'center' }}>Title</h1>
-      <Box
-        component="form"
-        sx={{ '& > :not(style)': { m: 1, width: '50ch' } }}
-        noValidate
-        autoComplete="off"
-        style={{ textAlign: 'center' }}
-      >
-        <TextField id="standard-basic" label="What ingredients do you have" variant="standard" />
-      </Box>
-      <div style={{ textAlign: 'center' }}> {/* Centering the link */}
-        <Link href="/login">Login</Link>
-      </div>
-    </div>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh", // Full viewport height
+        width: "100vw", // Full viewport width
+      }}
+    >
+      <Card sx={{ maxWidth: 500 }}>
+        <CardMedia sx={{ height: 300 }} image="/food.jpg" title="food">
+          <Image src={foodImage} alt="My Image" width={500}></Image>
+        </CardMedia>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            AI Nutrition Planner
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            The AI Nutrition Planner is an innovative web application that
+            leverages artificial intelligence to help users create personalized
+            meal plans based on their dietary needs, health goals, and
+            preferences.
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" href="login">
+            LOG IN
+          </Button>
+        </CardActions>
+      </Card>
+    </Box>
   );
 }
