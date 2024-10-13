@@ -24,7 +24,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 const pages = [
     { name: 'Add Ingredients', href: '/add-ingredients' },
     { name: 'Meal Calc', href: '/meal' },
-    { name: 'Logout', href: '/' }
+    { name: 'Logout', href: '/login' }
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
