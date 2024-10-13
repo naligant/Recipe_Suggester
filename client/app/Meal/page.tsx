@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link'; // Import Link from next/link
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
+import avataricon from "../Images/profile-user.png"
 
 const pages = [
   { name: 'Add Ingredients', href: '/add-ingredients' },
@@ -33,24 +34,40 @@ export default function CenteredBoxPage() {
   const handleClick = async () => {
     setMarginTop('20px'); // Move the box to the top of the screen
     setBoxHeight('150px'); // Reduce the height by half
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    try {
+      const response = await fetch('http://localhost:8000/submit_values', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ calories: leftInput, cuisine: rightInput}),
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
+      });
 
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
+      const data = await response.json();
+      console.log(data);
+  } catch (error) {
+    console.error("Error submitting calories and cuisine", error);
+  }
+};
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorElNav(event.currentTarget);
+  };
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+      setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+      setAnchorElUser(null);
   };
 
   return (

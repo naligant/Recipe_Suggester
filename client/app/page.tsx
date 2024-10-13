@@ -36,8 +36,8 @@ export default function Home() {
             preferences.
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" href="login">
+        <CardActions sx={{ justifyContent:"center" }}>
+          <Button size="small" href="login" sx={{ backgroundColor: "blue", color: "white" }}>
             LOG IN
           </Button>
         </CardActions>

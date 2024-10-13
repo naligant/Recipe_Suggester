@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from openai_prompts import ai_insights
+from openai_prompts import main
 
 app = FastAPI()
 
@@ -72,16 +72,17 @@ class calories_cuisine(BaseModel):
 
 @app.post("/submit")
 async def submit_ingredients(data: IngredientList):
-    print("Received ingredients: {data.ingredients}")
-    global ingredients_store
-    ingredients_store = data.ingredients
+    print("Received  ingredients: {data.ingredients}")
+    for ingredient in data.ingredients:
+        ingredients_store.append(data.ingredients)
     return {"message": "Ingredients received", "ingredients": data.ingredients}
 
 @app.post("/submit_values")
-async def submit_calories_cuisine(data: calories_cuisine):
+async def submit_values(data: calories_cuisine):
     print("Received calories: {data.calories}")
     print("Received cuisine: {data.cuisine}")
 
-    ai_insight = ai_insights(data.calories, data.cuisine, ingredients_store)
+    ai_insight = main(data.calories, data.cuisine, ingredients_store)
+    print(data.calories)
 
-    return {"message": "AI insight generated","ai insight": ai_insight, "calories": data.calories, "cuisine": data.cuisine, "ingredients": ingredients_store}
+    return {"message": "AI insight generated", "ai insight": ai_insight, "calories": data.calories, "cuisine": data.cuisine, "ingredients": ingredients_store}
