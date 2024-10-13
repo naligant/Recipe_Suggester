@@ -21,6 +21,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import Stack from '@mui/material/Stack';
+
 
 const pages = [
   { name: 'Add Ingredients', href: '/add-ingredients' },
@@ -83,7 +85,7 @@ const IngredientInput: React.FC = () => {
     }
 
     // Clear all the ingredients after submission
-    setIngredientsList([]);
+    // setIngredientsList([]);
     
   };
 
@@ -262,11 +264,14 @@ const IngredientInput: React.FC = () => {
           )}
 
           {/* Use a form with onSubmit to call handleSubmit */}
-          <form id="ingredient_form" onSubmit={handleSubmit}>
+          <Stack spacing = {2} direction = "row">
+            <form id="ingredient_form" onSubmit={handleSubmit}>
           
-              <button type = "submit" className = "submit-button"> Submit </button>
+                <button type = "submit" className = "submit-button"> Submit </button>
             
-          </form>
+            </form>
+          <a href = "/meal" target = "_self" rel = "noopener noreferrer"><button type = "submit" className = "submit-button"> Continue </button></a>
+          </Stack>
         </div>
       </div>
       </>
