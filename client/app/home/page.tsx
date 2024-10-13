@@ -87,6 +87,24 @@ export default function Home() {
                 <AppBar position="static" sx={{ width: '100%', backgroundColor: 'lightgray', boxShadow: 'none' }}>
                     <Container maxWidth={false}>
                         <Toolbar disableGutters sx={{ padding: 0 }}>
+                        {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            href="#app-bar-with-responsive-menu"
+                            sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                            }}
+                        >
+                             Nutrition Planner
+                        </Typography>
                             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                                 <IconButton
                                     size="large"
@@ -122,6 +140,24 @@ export default function Home() {
                                     ))}
                                 </Menu>
                             </Box>
+                            <Typography
+                                variant="h5"
+                                noWrap
+                                component="a"
+                                href="#app-bar-with-responsive-menu"
+                                sx={{
+                                mr: 2,
+                                display: { xs: 'flex', md: 'none' },
+                                flexGrow: 1,
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                                }}
+                            >
+                                Nutrition Planner
+                            </Typography>
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                                 {pages.map((page) => (
                                     <Link key={page.name} href={page.href} style={{ textDecoration: 'none' }}>
@@ -166,9 +202,6 @@ export default function Home() {
                 </AppBar>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
-                <header>
-                    <h1>Nutrition Planner</h1>
-                </header>
                 <header>
                     <h1>About</h1>
                 </header>
