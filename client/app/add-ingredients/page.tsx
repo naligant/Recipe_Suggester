@@ -1,9 +1,10 @@
-'use client'
-import React, { useState } from "react";
-import "./IngredientInput.css"; // Import for simple styling
+'use'
+
+import React, { useState } from 'react';
+import './IngredientInput.css'; // Import for simple styling
 
 const IngredientInput: React.FC = () => {
-  const [ingredient, setIngredient] = useState<string>(""); // State for the current input
+  const [ingredient, setIngredient] = useState<string>(''); // State for the current input
   const [ingredientsList, setIngredientsList] = useState<string[]>([]); // State for the list of ingredients
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(true); // Open dropdown by default
 
@@ -14,12 +15,12 @@ const IngredientInput: React.FC = () => {
   const handleAddIngredient = () => {
     if (ingredient.trim()) {
       setIngredientsList((prevIngredients) => [...prevIngredients, ingredient]);
-      setIngredient(""); // Clear input after adding
+      setIngredient(''); // Clear input after adding
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleAddIngredient();
     }
   };
@@ -28,6 +29,12 @@ const IngredientInput: React.FC = () => {
     setIngredientsList((prevIngredients) =>
       prevIngredients.filter((_, i) => i !== index)
     );
+  };
+
+  const handleSubmit = () => {
+    console.log("Submitted ingredients:", ingredientsList);
+    // Clear all the ingredients after submission
+    
   };
 
   return (
@@ -62,6 +69,8 @@ const IngredientInput: React.FC = () => {
             ))}
           </ul>
         )}
+
+        <button className="submit-button" onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );
