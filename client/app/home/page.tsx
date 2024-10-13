@@ -12,6 +12,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 
 const pages = [
     { name: 'Add Ingredients', href: '/add-ingredients' },
@@ -19,6 +22,44 @@ const pages = [
     { name: 'Logout', href: '/logout' }
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+// For ingredient information
+const bull = (
+    <Box
+      component="span"
+      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+    >
+      •
+    </Box>
+);
+
+const card_1 = (
+    <React.Fragment>
+      <CardContent>
+        <Typography variant="h5" component="div">
+          Eggs
+        </Typography>
+      </CardContent>
+    </React.Fragment>
+  );
+  const card_2 = (
+    <React.Fragment>
+      <CardContent>
+        <Typography variant="h5" component="div">
+          Milk
+        </Typography>
+      </CardContent>
+    </React.Fragment>
+  );
+  const card_3 = (
+    <React.Fragment>
+      <CardContent>
+        <Typography variant="h5" component="div">
+          Bread
+        </Typography>
+      </CardContent>
+    </React.Fragment>
+  );
 
 export default function Home() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -140,6 +181,16 @@ export default function Home() {
                 <header>
                     <h1>Current Ingredients</h1>
                 </header>
+                <Box sx={{ 
+                    alignContent: 'center',
+                    minWidth: 275,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2 }}>
+                    <Card variant="outlined">{card_1}</Card>
+                    <Card variant="outlined">{card_2}</Card>
+                    <Card variant="outlined">{card_3}</Card>
+                </Box>
                 <header>
                     <h1>Previous Recipes</h1>
                 </header>
