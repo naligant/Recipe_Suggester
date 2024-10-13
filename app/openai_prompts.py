@@ -15,7 +15,7 @@ def ai_insights():
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a helpful assistant that should only answer questions related to recipes, ingredients, calories, and cuisines. Any other topics prompted, respond with 'Invalid question.'"},
-            {"role": "user", "content": "what are some good Italian recipes that can be made with eggs, chicken, cheese, and tortillas that is close to about 1800 calories?"}
+            {"role": "user", "content": "what are some good Italian recipes that can be made with eggs, milk, bread, and oil that is close to about 1800 calories?"}
         ]
     )
     return completion.choices[0].message.content

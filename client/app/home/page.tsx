@@ -15,11 +15,16 @@ import MenuItem from '@mui/material/MenuItem';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const pages = [
     { name: 'Add Ingredients', href: '/add-ingredients' },
     { name: 'Meal Calc', href: '/meal' },
-    { name: 'Logout', href: '/logout' }
+    { name: 'Logout', href: '/' }
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -227,6 +232,108 @@ export default function Home() {
                 <header>
                     <h1>Previous Recipes</h1>
                 </header>
+                <div>
+      <Accordion>
+        <AccordionSummary
+        //   expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Frittata</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <Typography variant="body1">
+            A frittata is an Italian egg dish similar to a crustless quiche.
+        </Typography>
+        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+            Ingredients:
+        </Typography>
+        <Typography variant="body1">
+            - 6 large eggs (about 420 calories)
+            <br />
+            - 1/2 cup milk (about 75 calories)
+            <br />
+            - 4 slices of bread (about 480 calories)
+            <br />
+            - 1/4 cup olive oil (about 480 calories)
+            <br />
+            - Vegetables of your choice (optional, calories may vary)
+        </Typography>
+        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+            Instructions:
+        </Typography>
+        <Typography variant="body1">
+            1. Preheat your oven to 375°F (190°C).
+            <br />
+            2. Whisk together the eggs and milk in a bowl. Add salt and pepper.
+            <br />
+            3. Meanwhile, heat the olive oil in an oven-safe skillet over medium heat.
+            <br />
+            4. If you're using vegetables, sauté them in the oil until tender.
+            <br />
+            5. Tear or cut the bread into small pieces and add to the skillet, mixing with the vegetables.
+            <br />
+            6. Pour the egg mixture over the bread and vegetables, cooking until the edges begin to set (about 5 minutes).
+            <br />
+            7. Transfer the skillet to the oven and bake for 15-20 minutes until the top is set and golden.
+        </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+        //   expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2-content"
+          id="panel2-header"
+        >
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Strata</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <Typography variant="body1">
+            A strata is a savory bread pudding that incorporates eggs and milk.
+        </Typography>
+        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+            Ingredients:
+        </Typography>
+        <Typography variant="body1">
+            - 6 slices of bread (about 600 calories)
+        </Typography>
+        <Typography variant="body1">
+            - 6 large eggs (about 420 calories)
+        </Typography>
+        <Typography variant="body1">
+            - 2 cups milk (about 300 calories)
+        </Typography>
+        <Typography variant="body1">
+            - 1/4 cup olive oil (about 480 calories)
+        </Typography>
+        <Typography variant="body1">
+            - Salt, pepper, and herbs (optional)
+        </Typography>
+        
+        <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+            Instructions:
+        </Typography>
+        <Typography variant="body1">
+            1. Preheat oven to 350°F (175°C).
+        </Typography>
+        <Typography variant="body1">
+            2. Tear the bread into pieces and place in a greased baking dish.
+        </Typography>
+        <Typography variant="body1">
+            3. In a bowl, whisk together eggs, milk, salt, pepper, and any herbs of choice.
+        </Typography>
+        <Typography variant="body1">
+            4. Pour the egg mixture over the bread and allow it to soak for about 15 minutes.
+        </Typography>
+        <Typography variant="body1">
+            5. Drizzle olive oil over the top and stir gently to combine.
+        </Typography>
+        <Typography variant="body1">
+            6. Bake for 30-40 minutes until the top is golden and a knife inserted comes out clean.
+        </Typography>
+        </AccordionDetails>
+      </Accordion>
+    </div>
             </Box>
 
         </>
