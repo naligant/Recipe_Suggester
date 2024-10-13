@@ -4,30 +4,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-
-// Define a type for custom props (boxHeight and marginTop)
-interface CenteredBoxProps {
-  marginTop: string;
-  boxHeight: string;
-}
-
-const CenteredBox = styled(Box)<CenteredBoxProps>(({ theme, marginTop, boxHeight }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '80%', // Keep the width static
-  maxWidth: '600px', // Max width remains the same
-  height: boxHeight, // Dynamic height for shrinking
-  borderRadius: '8px', // Rounded corners
-  padding: theme.spacing(2),
-  margin: 'auto',
-  marginTop: marginTop, // Dynamic margin for moving to the top
-  textAlign: 'center',
-  backgroundColor: '#ffffff', // Custom background color
-  boxShadow: theme.shadows[5], // Drop shadow from Material-UI theme
-}));
 
 export default function CenteredBoxPage() {
   const [leftInput, setLeftInput] = React.useState('');
@@ -52,7 +28,24 @@ export default function CenteredBoxPage() {
         flexDirection: 'column', // Allow vertical stacking
       }}
     >
-      <CenteredBox marginTop={marginTop} boxHeight={boxHeight}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '80%', // Keep the width static
+          maxWidth: '600px', // Max width remains the same
+          height: boxHeight, // Dynamic height for shrinking
+          borderRadius: '8px', // Rounded corners
+          padding: 2,
+          margin: 'auto',
+          marginTop: marginTop, // Dynamic margin for moving to the top
+          textAlign: 'center',
+          backgroundColor: '#ffffff', // Custom background color
+          boxShadow: 5, // Drop shadow from Material-UI theme
+        }}
+      >
         <Box sx={{ display: 'flex', width: '100%', mb: 2 }}>
           <TextField
             variant="outlined"
@@ -72,7 +65,7 @@ export default function CenteredBoxPage() {
         <Button variant="contained" color="primary" onClick={handleClick} sx={{ mt: 2 }}>
           Click Me
         </Button>
-      </CenteredBox>
+      </Box>
     </Box>
   );
 }
